@@ -40,13 +40,4 @@ public class Alumno {
 		this.materiasAprobadas = materiasAprobadas;
 	}
 	
-	public boolean buscarMateriasAprobadas(Materia materia) {
-		for (Materia aprobada : materiasAprobadas) {
-			if (aprobada.equals(materia)) {
-				return true;
-			}
-		}
-		return false;
-		
-	}
 }

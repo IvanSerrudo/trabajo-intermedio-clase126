@@ -25,21 +25,24 @@ public class Intermedio {
 			for (int i = 0; i < archivo.size(); i++) {
 				String[] inscr = archivo.get(i).split(";");
 				boolean AlumnoExiste = buscarAlumno(inscr[0],Integer.parseInt(inscr[1]));
+				boolean MateriaExiste = buscarMateria(inscr[2],Integer.parseInt(inscr[3]));
 				Alumno inscrAlum = null;
 				Materia inscrMat = null;
 				Inscripcion inscripcion = null;
+				
 				if (AlumnoExiste) {
 					inscrAlum = buscarAlumno(Integer.parseInt(inscr[1]));
 				}
-				boolean MateriaExiste = buscarMateria(inscr[2],Integer.parseInt(inscr[3]));
 				if (MateriaExiste) {
 					inscrMat = buscarMateria(Integer.parseInt(inscr[3]));
 				}
-				
+				// Si se verifica se crea la inscripción, ella indica si es válida o no
 				if (AlumnoExiste && MateriaExiste) {
 					inscripcion = new Inscripcion(inscrAlum, inscrMat);
 					listaInscripciones.add(inscripcion);
 				}
+				
+				// Empieza a escribir el archivo respuesta.csv
 				if (!AlumnoExiste) {
 					Files.write(respuesta, (inscr[0]+";"+inscr[2]+";"+ "No es alumno regular"+System.lineSeparator()).getBytes(),StandardOpenOption.APPEND);
 				} else if (!MateriaExiste) {
@@ -75,22 +78,13 @@ public class Intermedio {
 	private static void instanciarAlumnos() {
 		Alumno alumno1 = new Alumno("Ivan",1001);
 		Alumno alumno2 = new Alumno("Sebita",1002);
-		alumno2.getmateriasAprobadas().add(codMateriaAprobada(1));
+		alumno2.getmateriasAprobadas().add(buscarMateria(1));
 		Alumno alumno3 = new Alumno("Elias",1003);
-		alumno3.getmateriasAprobadas().add(codMateriaAprobada(1));
-		alumno3.getmateriasAprobadas().add(codMateriaAprobada(4));
+		alumno3.getmateriasAprobadas().add(buscarMateria(1));
+		alumno3.getmateriasAprobadas().add(buscarMateria(4));
 		listaAlumnos.add(alumno1);
 		listaAlumnos.add(alumno2);
 		listaAlumnos.add(alumno3);
-	}
-	
-	private static Materia codMateriaAprobada(int codigo) {
-		for (Materia materia : listaMaterias) {
-			if (materia.getCodigo() == codigo) {
-				return materia;
-			}
-		}
-		return null;
 	}
 	
 	private static boolean buscarAlumno (String nombre, int legajo) {
