@@ -17,12 +17,8 @@ public class Intermedio {
 	private static List<Alumno> listaAlumnos = new ArrayList<Alumno>();
 	private static List<Inscripcion> listaInscripciones = new ArrayList<Inscripcion>();
 	public static void main(String[] args) {
-		// instanciar materias
 		instanciarMaterias();
-		// instanciar alumnos y cargarmateriasaprobadas por los alumnos
 		instanciarAlumnos();
-		//inscribir
-		  //leer el archivo de  inscripcion e instancio las inscripciones
 		try {
 			List<String> archivo = Files.readAllLines(Paths.get("src//main//java//Archivo//inscripciones.csv"));
 			Path respuesta = Paths.get("src//main//java//Archivo//respuesta.csv");
